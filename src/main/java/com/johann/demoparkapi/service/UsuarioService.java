@@ -2,12 +2,13 @@ package com.johann.demoparkapi.service;
 
 import com.johann.demoparkapi.entity.Usuario;
 import com.johann.demoparkapi.exception.EntityNotFoundException;
+import com.johann.demoparkapi.exception.PasswordInvalidException;
 import com.johann.demoparkapi.exception.UsernameUniqueViolationException;
 import com.johann.demoparkapi.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
@@ -21,8 +22,8 @@ public class UsuarioService {
     public Usuario salvar(Usuario usuario) {
         try {
             return usuarioRepository.save(usuario);
-        } catch (DataIntegrityViolationException ex) {
-            throw new UsernameUniqueViolationException(String.format("Username {%s} já cadastrado", usuario.getUsername()));
+        } catch (org.springframework.dao.DataIntegrityViolationException ex) {
+            throw new UsernameUniqueViolationException(String.format("Username '%s' já cadastrado", usuario.getUsername()));
         }
     }
 
@@ -36,12 +37,12 @@ public class UsuarioService {
     @Transactional
     public Usuario editarSenha(Long id, String senhaAtual, String novaSenha, String confirmaSenha) {
         if(!novaSenha.equals(confirmaSenha)) {
-            throw new RuntimeException("Nova senha não confere com a confirmação de senha");
+            throw new PasswordInvalidException("Nova senha não confere com a confirmação de senha");
         }
 
         Usuario user = buscarPorId(id);
         if(!user.getPassword().equals(senhaAtual)) {
-            throw new RuntimeException("Sua senha atual não confere");
+            throw new PasswordInvalidException("Sua senha atual não confere");
         }
 
         user.setPassword(novaSenha);
