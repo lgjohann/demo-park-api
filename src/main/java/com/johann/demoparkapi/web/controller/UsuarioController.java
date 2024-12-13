@@ -95,7 +95,9 @@ public class UsuarioController {
                             array = @ArraySchema(schema = @Schema(implementation = UsuarioResponseDto.class)))),
             }
     )
+
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UsuarioResponseDto>> getAll() {
         List<Usuario> users = usuarioService.buscarTodos();
         return ResponseEntity.ok().body(UsuarioMapper.toListDto(users));
