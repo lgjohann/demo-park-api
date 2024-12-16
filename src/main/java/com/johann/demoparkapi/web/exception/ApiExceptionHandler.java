@@ -1,5 +1,6 @@
 package com.johann.demoparkapi.web.exception;
 
+import com.johann.demoparkapi.exception.CpfUniqueViolationException;
 import com.johann.demoparkapi.exception.EntityNotFoundException;
 import com.johann.demoparkapi.exception.PasswordInvalidException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ApiExceptionHandler {
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ExceptionHandler({DataIntegrityViolationException.class, CpfUniqueViolationException.class})
     public ResponseEntity<ErrorMessage> uniqueViolationException(RuntimeException ex, HttpServletRequest request) {
         log.error("Api Error - ", ex);
         return ResponseEntity
