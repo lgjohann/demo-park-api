@@ -10,6 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
-    @Query("select c from Clientes c")
+    @Query("select c from Cliente c")
     Page<ClienteProjection> findAllPageable(Pageable pageaWble);
 }
