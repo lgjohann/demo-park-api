@@ -9,5 +9,5 @@ import lombok.Setter;
 public class VagaResponseDto {
     private Long id;
     private String codigo;
-    private String status
+    private String status;
 }
