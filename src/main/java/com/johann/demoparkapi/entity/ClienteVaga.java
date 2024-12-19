@@ -45,7 +45,7 @@ public class ClienteVaga {
 
     @Column(name = "valor", nullable = true, columnDefinition = "decimal(7,2)")
     private BigDecimal valor;
-    @Column(name = "valor", nullable = true, columnDefinition = "decimal(7,2)")
+    @Column(name = "desconto", nullable = true, columnDefinition = "decimal(7,2)")
     private BigDecimal desconto;
 
     @ManyToOne(fetch = FetchType.LAZY)
