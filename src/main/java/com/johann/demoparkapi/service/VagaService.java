@@ -2,8 +2,8 @@ package com.johann.demoparkapi.service;
 
 import com.johann.demoparkapi.entity.Vaga;
 import com.johann.demoparkapi.exception.CodigoUniqueViolationException;
+import com.johann.demoparkapi.exception.EntityNotFoundException;
 import com.johann.demoparkapi.repository.VagaRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
